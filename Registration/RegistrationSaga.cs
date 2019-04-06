@@ -36,6 +36,8 @@
             });
 
             await RequestTimeout<ReminderAfter24Hours>(context, TimeSpan.FromSeconds(2.4));
+
+            await RequestTimeout<ReminderAfter48Hours>(context, TimeSpan.FromSeconds(4.8));
         }
 
         public async Task Handle(ConfirmEmail message, IMessageHandlerContext context)
@@ -59,11 +61,11 @@
             log.Info($"Email {message.Email} verified. We've got a new user");
         }
 
-        public async Task Timeout(ReminderAfter24Hours state, IMessageHandlerContext context)
+        public Task Timeout(ReminderAfter24Hours state, IMessageHandlerContext context)
         {
             log.Info("24 hours since registration have elapsed and no confirmation was received. Going to remind.");
 
-            await RequestTimeout<ReminderAfter48Hours>(context, TimeSpan.FromSeconds(4.8));
+            return Task.CompletedTask;
         }
 
         public Task Timeout(ReminderAfter48Hours state, IMessageHandlerContext context)
