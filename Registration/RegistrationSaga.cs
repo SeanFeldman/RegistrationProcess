@@ -35,9 +35,9 @@
                 VerificationCode = Data.VerificationCode
             });
 
-            await RequestTimeout<ReminderAfter24Hours>(context, TimeSpan.FromSeconds(2.4));
+            await RequestTimeout<ReminderAfter24Hours>(context, TimeSpan.FromSeconds(5));
 
-            await RequestTimeout<ReminderAfter48Hours>(context, TimeSpan.FromSeconds(4.8));
+            await RequestTimeout<ReminderAfter48Hours>(context, TimeSpan.FromSeconds(10));
         }
 
         public async Task Handle(ConfirmEmail message, IMessageHandlerContext context)
